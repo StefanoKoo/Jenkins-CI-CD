@@ -16,3 +16,5 @@ Jenkins CI/CD 도입을 위한 Information 정리
 > gitlab 연동 시, 'Gitlab API Token' 은 제대로 Add 가 되지 않으므로, 'Username with password' 로 Credential 을 만들어야 한다.
 
 [Gitlab Webhook 404 Not Found Error](https://github.com/jenkinsci/gitlab-plugin/issues/608)
+
+[License 문제 해결](https://beomseok95.tistory.com/185)
