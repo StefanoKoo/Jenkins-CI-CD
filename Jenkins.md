@@ -14,15 +14,15 @@ Jenkins CI/CD 도입을 위한 Information 정리
  CI 자동화 툴을 이용함으로서, 개발자들은 기존에 개발 -> 테스트 -> 빌드 하는 등의 번거로운 과정에서 소스를 commit 후 퇴근하면, 다음 날 버그 리포트를 기반으로 작업을 하는 간소화된 개발 루틴을 가질 수 있다.
  이 중 Jenkins 는 Github, Gitlab 과 같은 VCS 들과의 연동을 간편하게 할 수 있어, 사내망에 Jenkins 를 이용하여 CI/CD 자동화 환경을 구성해 보았다.
 ***
-# 3. 사내 도입 예시
+# 3. 도입 예시
 ## 3.1 기저 개발 환경
- 도입에 앞서, 사내 개발 환경을 간략히 보면 다음과 같다.
+ 도입에 앞서, 개발 환경을 간략히 보면 다음과 같다.
  1. Gitlab (Community Edition, Version : 9.5.0, IP 주소 : 10.1.x.x)
  2. 만들어진 이미지들을 배포할 배포서버 (IP 주소 : 10.77.x.x)
  3. Local PC (IP 주소 : 10.77.x.x)
  4. Jenkins 가 설치될 서버 (Ubuntu 18.04 LTS, Vagrant 2.2.14)
  
- 사내에 제품군 별로 분산 빌드를 구축하기 위해, Vagrant 로 Jenkins 서버 구성을 하여 Master/Agent(Slave) 구조로 구축하였다.
+ 아이템 별로 분산 빌드를 구축하기 위해, Vagrant 로 Jenkins 서버 구성을 하여 Master/Agent(Slave) 구조로 구축하였다.
 ## 3.2 Vagrant 구성
  Gitlab 서버(10.1.x.x) 와 배포 서버 및 Local PC(10.77.x.x) 대역과 통신이 되어야 하므로 Vagrant 로 구성 시 IP 를 2개 할당해준다.
  "public_network" 2개를 명시해주면 2개의 NI 가 생긴다.
