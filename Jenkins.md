@@ -18,3 +18,5 @@ Jenkins CI/CD 도입을 위한 Information 정리
 [Gitlab Webhook 404 Not Found Error](https://github.com/jenkinsci/gitlab-plugin/issues/608)
 
 [License 문제 해결](https://beomseok95.tistory.com/185)
+
+[Agent(Slave) Node 추가하여 분산빌드(Distributed Build) 환경 구성하기](https://nirsa.tistory.com/302)
