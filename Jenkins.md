@@ -12,7 +12,7 @@ Jenkins CI/CD 도입을 위한 Information 정리
  CI 자동화 툴들 중 하나로, 04년 썬 마이크로시스템즈에서 개발이 시작되어 05년에 java.net 에 처음 출시 되었다.
  Jenkins 와 같은 CI 툴들이 등장하기 이전에는, 개발자들이 commit 이 끝난 심야시간대에 build 를 진행하는 일명 'nightly-build' 가 이루어졌었다고 한다.
  CI 자동화 툴을 이용함으로서, 개발자들은 기존에 개발 -> 테스트 -> 빌드 하는 등의 번거로운 과정에서 소스를 commit 후 퇴근하면, 다음 날 버그 리포트를 기반으로 작업을 하는 간소화된 개발 루틴을 가질 수 있다.
- 이 중 Jenkins 는 Github, Gitlab 과 같은 VCS 들과의 연동을 간편하게 할 수 있어, 사내망에 Jenkins 를 이용하여 CI/CD 자동화 환경을 구성해 보았다.
+ 이 중 Jenkins 는 Github, Gitlab 과 같은 VCS 들과의 연동을 간편하게 할 수 있어, Jenkins 를 이용하여 CI/CD 자동화 환경을 구성해 보았다.
 ***
 # 3. 도입 예시
 ## 3.1 기저 개발 환경
@@ -59,3 +59,5 @@ Jenkins CI/CD 도입을 위한 Information 정리
 [License 문제 해결](https://beomseok95.tistory.com/185)
 
 [Agent(Slave) Node 추가하여 분산빌드(Distributed Build) 환경 구성하기](https://nirsa.tistory.com/302)
+
+[Jenkins Gitlab Plugin 자세한 Log 추가하는 방법](https://github.com/jenkinsci/gitlab-plugin)
