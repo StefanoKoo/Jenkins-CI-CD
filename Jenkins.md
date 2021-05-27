@@ -14,7 +14,7 @@ Jenkins CI/CD 도입을 위한 Information 정리
  CI 자동화 툴을 이용함으로서, 개발자들은 기존에 개발 -> 테스트 -> 빌드 하는 등의 번거로운 과정에서 소스를 commit 후 퇴근하면, 다음 날 버그 리포트를 기반으로 작업을 하는 간소화된 개발 루틴을 가질 수 있다.
  이 중 Jenkins 는 Github, Gitlab 과 같은 VCS 들과의 연동을 간편하게 할 수 있어, Jenkins 를 이용하여 CI/CD 자동화 환경을 구성해 보았다.
 ***
-# 3. 도입 예시
+# 3. 구축
 ## 3.1 기저 개발 환경
  도입에 앞서, 개발 환경을 간략히 보면 다음과 같다.
  1. Gitlab (Community Edition, Version : 9.5.0, IP 주소 : 10.1.x.x)
@@ -43,23 +43,56 @@ Jenkins CI/CD 도입을 위한 Information 정리
   ```
   
  상기의 노드는 Master/Agent 중 Master 노드의 역할을 한다. Agent 노드도 마찬가지로 10.1.x.x 대역과 10.77.x.x 대역 2개의 IP를 모두 할당해준다.
+ Master/Agent 구조는 아래의 링크를 참조하여 구성하였다.
  
+ 
+## 3.3 Jenkins 설치
+ Ubuntu 18.04 가 설치된 서버에 Jenkins 를 설치한다.
+ Jenkins 설치를 위해서는 Java 설치가 선행되어야 한다.
+ 
+ 자세한 설치 및 설정은 다음의 링크를 참조하면 쉽게 가능하다.
+ 
+ [우분투 18.04 에 Jenkins 설치하기](https://softwaree.tistory.com/61)
+ 
+## 3.4 Jenkins Agent(Slave) 노드 연동
+ [Agent(Slave) Node 추가하여 분산빌드(Distributed Build) 환경 구성하기](https://nirsa.tistory.com/302)
+ 
+ 상기의 방법이 가장 쉽게 따라할 수 있었다.
+ 
+ 
+## 3.5 Jenkins Plugin
+ 기본적으로 첫 설치 시, recommend 하는 plugin 은 그냥 설치하는게 좋아보임
+ 본 연동에서는 다음과 같은 plugin 들을 사용했음
+ - Git Plugin (Hook 이 포함되어 있는 것 같은데, 포함되어 있지않을 경우 Gitlab hook plugin 을 설치하면 됨)
+ - Publish over SSH : 배포서버에 SSH 통신으로 파일 배포
+ - Gradle Plugin : Recommend 에 있는지는 모르겠으나, 테스트 용으로 Android app 을 배포할 것이므로 설치
+ 
+## 3.6 Jenkins Gitlab 연동
+ Gitlab Project 에 push event 가 발생할 경우, Jenkins 의 Master 노드가 Agent 노드들 중 맞는 노드에게 빌드를 할당하고 해당 노드에서
+ 빌드 후 배포까지 연동한다. 연동 방법은 [Gitlab Jenkins Webhook 연동](https://www.google.com/search?q=gitlab+jenkins+webhook+%EC%97%B0%EB%8F%99&oq=gitlab+jenkins&aqs=chrome.1.69i57j69i59j69i60l3.5236j0j1&sourceid=chrome&ie=UTF-8) 으로 검색하면 쉽게 따라할 수 있다.
+
+ 구축 중에 Webhook Test 했을 때, 404 Not Found 에러가 발생하였다.
+ 하지만 이는 너무 오래된 버전(9.5.0)의 Gitlab 을 사용해서 발생한 문제였다.
+ 
+ [Gitlab Webhook 404 Not Found Error](https://github.com/jenkinsci/gitlab-plugin/issues/608)
+ 
+ 그리고 [Jenkins 에 Gitlab Plugin 관련 자세한 로그를 추가하는 방법](https://github.com/jenkinsci/gitlab-plugin)도 있다.
+
+## 3.7 Publish over SSH 로 배포 자동화
+  다음의 Link 를 참고하면 쉽게 따라할 수 있다.
+  
+  [Publish over SSH 로 배포 자동화](https://uchupura.tistory.com/64)
+  
+  Passphrase 에는 SSH 비밀번호를 입력하면 된다.
+  
+  
 ***
 # References
-[Jenkins 기본 Port 변경](https://jojoldu.tistory.com/354)
-
 [CI/CD(지속적 통합/지속적 제공): 개념, 방법, 장점, 구현 과정](https://www.redhat.com/ko/topics/devops/what-is-ci-cd)
 
 [Gitlab Private Repository Jenkins 연동](https://softwaree.tistory.com/66)
 
 > gitlab 연동 시, 'Gitlab API Token' 은 제대로 Add 가 되지 않으므로, 'Username with password' 로 Credential 을 만들어야 한다.
 
-[Gitlab Webhook 404 Not Found Error](https://github.com/jenkinsci/gitlab-plugin/issues/608)
-
 [License 문제 해결](https://beomseok95.tistory.com/185)
 
-[Agent(Slave) Node 추가하여 분산빌드(Distributed Build) 환경 구성하기](https://nirsa.tistory.com/302)
-
-[Jenkins Gitlab Plugin 자세한 Log 추가하는 방법](https://github.com/jenkinsci/gitlab-plugin)
-
-[Publish over SSH 로 배포 자동화](https://uchupura.tistory.com/64)
