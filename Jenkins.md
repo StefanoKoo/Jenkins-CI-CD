@@ -61,3 +61,5 @@ Jenkins CI/CD 도입을 위한 Information 정리
 [Agent(Slave) Node 추가하여 분산빌드(Distributed Build) 환경 구성하기](https://nirsa.tistory.com/302)
 
 [Jenkins Gitlab Plugin 자세한 Log 추가하는 방법](https://github.com/jenkinsci/gitlab-plugin)
+
+[Publish over SSH 로 배포 자동화](https://uchupura.tistory.com/64)
